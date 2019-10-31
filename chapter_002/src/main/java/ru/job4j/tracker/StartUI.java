@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 
-import java.util.Scanner;
-
 /**
  * Класс представляет консольное приложение для работы с классом Tracker.
  * @author smorozov30 (sergey.se1ove.morozov@gmail.com).
@@ -10,21 +8,19 @@ public class StartUI {
     /**
      * В методе выполняется работа с меню.
      * Пользователь вводит номер пункта меню и по требованию необходимые данные для выполнения требуемой операции.
-     * @param scanner объект класса Scanner, используется для ввода данных с консоли.
+     * @param input объект класса ConsoleInput, используется для ввода данных с консоли.
      * @param tracker объект класса Tracker, является оберткой для массива заявок, используется для работы с заявками.
      */
-    public void init(Scanner scanner, Tracker tracker) {
+    public void init(Input input, Tracker tracker) {
         boolean run = true;
         while (run) {
             this.showMenu();
-            System.out.print("Select: ");
-            int select = Integer.valueOf(scanner.nextLine());
+            int select = input.askInt("Select: ");
             if (select == 6) {
                 run = false;
             } else if (select == 0) {
                 System.out.println("=== Create a new Item ====");
-                System.out.println("Enter name: ");
-                Item item = new Item(scanner.nextLine());
+                Item item = new Item(input.askStr("Enter name: "));
                 tracker.add(item);
             } else if (select == 1) {
                 System.out.println("=== All Items ====");
@@ -33,12 +29,10 @@ public class StartUI {
                 }
             } else if (select == 2) {
                 System.out.println("=== Edit item ====");
-                System.out.print("Enter id: ");
-                Item previous = tracker.findById(scanner.nextLine());
+                Item previous = tracker.findById(input.askStr("Enter id: "));
                 System.out.println();
                 if (previous != null) {
-                    System.out.print("Enter a name to replace: ");
-                    Item next = new Item(scanner.nextLine());
+                    Item next = new Item(input.askStr("Enter a name to replace: "));
                     next.setId(previous.getId());
                     tracker.replace(previous.getId(), next);
                     System.out.println();
@@ -48,16 +42,15 @@ public class StartUI {
                 }
             } else if (select == 3) {
                 System.out.println("=== Delete item ===");
-                System.out.print("Enter id: ");
-                if (tracker.delete(scanner.nextLine())) {
+                String id = input.askStr("Enter id: ");
+                if (tracker.delete(id)) {
                     System.out.println("Item deleted");
                 } else {
                     System.out.println("Item not found");
                 }
             } else if (select == 4) {
                 System.out.println("=== Find item by Id ===");
-                System.out.print("Enter id: ");
-                Item item = tracker.findById(scanner.nextLine());
+                Item item = tracker.findById(input.askStr("Enter id: "));
                 if (item != null) {
                     System.out.println("Item found: " + item.getName());
                 } else {
@@ -65,8 +58,7 @@ public class StartUI {
                 }
             } else if (select == 5) {
                 System.out.println("=== Find items by name ===");
-                System.out.print("Enter a name to search: ");
-                Item[] items = tracker.findByName(scanner.nextLine());
+                Item[] items = tracker.findByName(input.askStr("Enter a name to search: "));
                 System.out.println();
                 if (items.length > 0) {
                     System.out.println(items.length + " items found:");
@@ -99,8 +91,8 @@ public class StartUI {
      * @param args - args.
      */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
-        new StartUI().init(scanner, tracker);
+        new StartUI().init(input, tracker);
     }
 }
