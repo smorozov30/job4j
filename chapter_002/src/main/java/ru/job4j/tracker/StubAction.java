@@ -5,7 +5,7 @@ public class StubAction implements UserAction {
 
     @Override
     public String name() {
-        return "Stub action";
+        return "===== Stub action =====";
     }
 
     @Override
