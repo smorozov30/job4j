@@ -8,7 +8,7 @@ public class StartUI {
     /**
      * В методе выполняется работа с меню.
      * Пользователь вводит номер пункта меню и по требованию необходимые данные для выполнения требуемой операции.
-     * @param input объект класса ConsoleInput, используется для ввода данных с консоли.
+     * @param input объект класса ValidateInput, используется для ввода данных с консоли.
      * @param tracker объект класса Tracker, является оберткой для массива заявок, используется для работы с заявками.
      */
     public void init(Input input, Tracker tracker, UserAction[] actions) {
@@ -16,11 +16,9 @@ public class StartUI {
         while (run) {
             this.showMenu(actions);
             System.out.println(actions.length + ". ======== Exit =========");
-            int select = input.askInt("Select: ");
-            if (select >= actions.length) {
-                break;
-            }
-            run = actions[select].execute(input, tracker);
+            int select = input.askInt("Select: ", actions.length);
+            UserAction action = actions[select];
+            run = action.execute(input, tracker);
         }
     }
 
@@ -39,10 +37,10 @@ public class StartUI {
      * @param args - args.
      */
     public static void main(String[] args) {
-        Input input = new ConsoleInput();
+        Input validate = new ValidateInput();
         Tracker tracker = new Tracker();
         UserAction[] actions = {new CreateAction(), new ShowAllAction(), new ReplaceAction(),
                                 new DeleteAction(), new FindByIdAction(), new FindByNameAction()};
-        new StartUI().init(input, tracker, actions);
+        new StartUI().init(validate, tracker, actions);
     }
 }
