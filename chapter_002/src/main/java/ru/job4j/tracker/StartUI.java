@@ -37,7 +37,8 @@ public class StartUI {
      * @param args - args.
      */
     public static void main(String[] args) {
-        Input validate = new ValidateInput();
+        Input input = new ConsoleInput();
+        Input validate = new ValidateInput(input);
         Tracker tracker = new Tracker();
         UserAction[] actions = {new CreateAction(), new ShowAllAction(), new ReplaceAction(),
                                 new DeleteAction(), new FindByIdAction(), new FindByNameAction()};
