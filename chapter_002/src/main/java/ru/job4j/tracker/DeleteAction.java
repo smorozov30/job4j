@@ -4,15 +4,10 @@ package ru.job4j.tracker;
  * Класс осуществляет действие удаления заявки.
  * @author smorozov30 (sergey.se1ove.morozov@gmail.com).
  */
-public class DeleteAction implements UserAction {
+public class DeleteAction extends BaseAction {
 
-    /**
-     * Метод возвращает название действия, за которое отвечает класс.
-     * @return строка.
-     */
-    @Override
-    public String name() {
-        return "===== Delete item =====";
+    protected DeleteAction(String name) {
+        super(name);
     }
 
     /**

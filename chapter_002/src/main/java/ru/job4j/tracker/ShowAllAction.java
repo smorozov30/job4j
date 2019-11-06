@@ -4,15 +4,10 @@ package ru.job4j.tracker;
  * Класс осуществляет действие вывода всех заявок.
  * @author smorozov30 (sergey.se1ove.morozov@gmail.com).
  */
-public class ShowAllAction implements UserAction {
+public class ShowAllAction extends BaseAction {
 
-    /**
-     * Метод возвращает название действия, за которое отвечает класс.
-     * @return строка.
-     */
-    @Override
-    public String name() {
-        return "====== All Items ======";
+    protected ShowAllAction(String name) {
+        super(name);
     }
 
     /**

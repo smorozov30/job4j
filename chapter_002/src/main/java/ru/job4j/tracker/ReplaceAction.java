@@ -4,15 +4,10 @@ package ru.job4j.tracker;
  * Класс осуществляет действие замены старой заявки - новой.
  * @author smorozov30 (sergey.se1ove.morozov@gmail.com).
  */
-public class ReplaceAction implements UserAction {
+public class ReplaceAction extends BaseAction {
 
-    /**
-     * Метод возвращает название действия, за которое отвечает класс.
-     * @return строка.
-     */
-    @Override
-    public String name() {
-        return "===== Edit item =======";
+    protected ReplaceAction(String name) {
+        super(name);
     }
 
     /**

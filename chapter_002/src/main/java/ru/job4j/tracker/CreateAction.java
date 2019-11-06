@@ -4,15 +4,10 @@ package ru.job4j.tracker;
  * Класс осуществляет действие добавления новой заявки.
  * @author smorozov30 (sergey.se1ove.morozov@gmail.com).
  */
-public class CreateAction implements UserAction {
+public class CreateAction extends BaseAction {
 
-    /**
-     * Метод возвращает название действия, за которое отвечает класс.
-     * @return строка.
-     */
-    @Override
-    public String name() {
-        return "= Create a new Item ===";
+    protected CreateAction(String name) {
+        super(name);
     }
 
     /**

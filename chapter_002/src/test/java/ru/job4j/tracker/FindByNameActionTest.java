@@ -18,7 +18,7 @@ public class FindByNameActionTest {
         Tracker tracker = new Tracker();
         Item item = new Item("fix bug");
         tracker.add(item);
-        FindByNameAction fbna = new FindByNameAction();
+        FindByNameAction fbna = new FindByNameAction("= Find items by name ==");
         fbna.execute(new StubInput(new String[] {item.getName()}), tracker);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("\r\n1 items found:")

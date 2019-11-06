@@ -4,15 +4,10 @@ package ru.job4j.tracker;
  * Класс осуществляет действие поиска заявки по имени.
  * @author smorozov30 (sergey.se1ove.morozov@gmail.com).
  */
-public class FindByNameAction implements UserAction {
+public class FindByNameAction extends BaseAction {
 
-    /**
-     * Метод возвращает название действия, за которое отвечает класс.
-     * @return строка.
-     */
-    @Override
-    public String name() {
-        return "= Find items by name ==";
+    protected FindByNameAction(String name) {
+        super(name);
     }
 
     /**

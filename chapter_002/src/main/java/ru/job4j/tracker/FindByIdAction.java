@@ -4,15 +4,10 @@ package ru.job4j.tracker;
  * Класс осуществляет действие поиска заявки по id.
  * @author smorozov30 (sergey.se1ove.morozov@gmail.com).
  */
-public class FindByIdAction implements UserAction {
+public class FindByIdAction extends BaseAction {
 
-    /**
-     * Метод возвращает название действия, за которое отвечает класс.
-     * @return строка.
-     */
-    @Override
-    public String name() {
-        return "=== Find item by Id ===";
+    protected FindByIdAction(String name) {
+        super(name);
     }
 
     /**
