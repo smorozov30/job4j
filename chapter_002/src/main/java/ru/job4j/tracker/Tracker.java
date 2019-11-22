@@ -3,7 +3,6 @@ package ru.job4j.tracker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.regex.MatchResult;
 
 public class Tracker {
     /**
@@ -46,7 +45,7 @@ public class Tracker {
         boolean result = false;
         if (this.findById(id) != null) {
             for (int index = 0; index < this.items.size(); index++) {
-                if (this.items.get(index) != null && this.items.get(index).getId().equals(id)) {
+                if (this.items.get(index).getId().equals(id)) {
                     this.items.set(index, item);
                     result = true;
                     break;
@@ -64,7 +63,7 @@ public class Tracker {
     public boolean delete(String id) {
         boolean result = false;
         for (int index = 0; index < items.size(); index++) {
-            if (this.items.get(index) != null && (this.items.get(index).getId()).equals(id)) {
+            if ((this.items.get(index).getId()).equals(id)) {
                 this.items.remove(index);
                 result = true;
                 break;
@@ -80,11 +79,7 @@ public class Tracker {
     public List<Item> findAll() {
         List<Item> all = new ArrayList<>();
         for (int index = 0; index < this.items.size(); index++) {
-            if (this.items.get(index) != null) {
-                all.add(this.items.get(index));
-            } else {
-                break;
-            }
+            all.add(this.items.get(index));
         }
         return all;
     }
@@ -97,7 +92,7 @@ public class Tracker {
     public List<Item> findByName(String name) {
         List<Item> result = new ArrayList<>();
         for (int index = 0; index < this.items.size(); index++) {
-            if (this.items.get(index) != null && (this.items.get(index).getName()).equals(name)) {
+            if ((this.items.get(index).getName()).equals(name)) {
                 result.add(this.items.get(index));
             }
         }
@@ -112,7 +107,7 @@ public class Tracker {
     public Item findById(String id) {
         Item item = null;
         for (int index = 0; index < this.items.size(); index++) {
-            if (this.items.get(index) != null && (this.items.get(index).getId()).equals(id)) {
+            if ((this.items.get(index).getId()).equals(id)) {
                 item = items.get(index);
                 break;
             }
