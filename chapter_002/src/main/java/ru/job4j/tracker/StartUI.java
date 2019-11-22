@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Класс представляет консольное приложение для работы с классом Tracker.
  * @author smorozov30 (sergey.se1ove.morozov@gmail.com).
@@ -11,13 +14,13 @@ public class StartUI {
      * @param input объект класса ValidateInput, используется для ввода данных с консоли.
      * @param tracker объект класса Tracker, является оберткой для массива заявок, используется для работы с заявками.
      */
-    public void init(Input input, Tracker tracker, UserAction[] actions) {
+    public void init(Input input, Tracker tracker, List<UserAction> actions) {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
-            System.out.println(actions.length + ". ======== Exit =========");
-            int select = input.askInt("Select: ", actions.length);
-            UserAction action = actions[select];
+            System.out.println(actions.size() + ". ======== Exit =========");
+            int select = input.askInt("Select: ", actions.size());
+            UserAction action = actions.get(select);
             run = action.execute(input, tracker);
         }
     }
@@ -25,10 +28,10 @@ public class StartUI {
     /**
      * Метод выводит в консоль пункты меню приложения.
      */
-    private void showMenu(UserAction[] actions) {
+    private void showMenu(List<UserAction> actions) {
         System.out.println("========== Menu ==========");
-        for (int index = 0; index < actions.length; index++) {
-            System.out.println(index + ". " + actions[index].name());
+        for (int index = 0; index < actions.size(); index++) {
+            System.out.println(index + ". " + actions.get(index).name());
         }
     }
 
@@ -40,14 +43,14 @@ public class StartUI {
         Input input = new ConsoleInput();
         Input validate = new ValidateInput(input);
         Tracker tracker = new Tracker();
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                                 new CreateAction("= Create a new Item ==="),
                                 new ShowAllAction("====== All Items ======"),
                                 new ReplaceAction("===== Edit item ======="),
                                 new DeleteAction("===== Delete item ====="),
                                 new FindByIdAction("=== Find item by Id ==="),
                                 new FindByNameAction("= Find items by name ==")
-                                 };
+                                );
         new StartUI().init(validate, tracker, actions);
     }
 }

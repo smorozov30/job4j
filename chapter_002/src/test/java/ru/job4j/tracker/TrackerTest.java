@@ -59,7 +59,7 @@ public class TrackerTest {
         tracker.add(first);
         tracker.add(second);
         tracker.add(third);
-        int result = tracker.findAll().length;
+        int result = tracker.findAll().size();
         int expected = 3;
         assertThat(result, is(expected));
     }
@@ -95,7 +95,7 @@ public class TrackerTest {
         tracker.add(second);
         tracker.add(third);
         tracker.add(fourth);
-        int result = tracker.findByName("test2").length;
+        int result = tracker.findByName("test2").size();
         int expected = 2;
         assertThat(result, is(expected));
     }

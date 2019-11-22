@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.regex.MatchResult;
 
@@ -7,12 +9,7 @@ public class Tracker {
     /**
      * Массив для хранение заявок.
      */
-    private Item[] items = new Item[100];
-
-    /**
-     * Указатель ячейки для новой заявки.
-     */
-    private int position = 0;
+    private List<Item> items = new ArrayList<>();
 
     /**
      * Константа используемая для генерации случайного id каждой заявки.
@@ -26,7 +23,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -48,9 +45,9 @@ public class Tracker {
     public boolean replace(String id, Item item) {
         boolean result = false;
         if (this.findById(id) != null) {
-            for (int index = 0; index < this.items.length; index++) {
-                if (this.items[index] != null && this.items[index].getId().equals(id)) {
-                    this.items[index] = item;
+            for (int index = 0; index < this.items.size(); index++) {
+                if (this.items.get(index) != null && this.items.get(index).getId().equals(id)) {
+                    this.items.set(index, item);
                     result = true;
                     break;
                 }
@@ -66,11 +63,9 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        for (int index = 0; index < items.length; index++) {
-            if (this.items[index] != null && (this.items[index].getId()).equals(id)) {
-                this.items[index] = null;
-                System.arraycopy(this.items, index + 1, this.items, index, this.items.length - 1 - index);
-                this.position--;
+        for (int index = 0; index < items.size(); index++) {
+            if (this.items.get(index) != null && (this.items.get(index).getId()).equals(id)) {
+                this.items.remove(index);
                 result = true;
                 break;
             }
@@ -82,15 +77,14 @@ public class Tracker {
      * Метод копирует заполненые ячейки массива items в новый массив и возвращает его.
      * @return Масиив объектов.
      */
-    public Item[] findAll() {
-        Item[] all = new Item[position];
-        for (int index = 0; index < this.items.length; index++) {
-            if (this.items[index] != null) {
-                all[index] = this.items[index];
+    public List<Item> findAll() {
+        List<Item> all = new ArrayList<>();
+        for (int index = 0; index < this.items.size(); index++) {
+            if (this.items.get(index) != null) {
+                all.add(this.items.get(index));
             } else {
                 break;
             }
-
         }
         return all;
     }
@@ -100,16 +94,13 @@ public class Tracker {
      * @param name Имя объекта для поиска.
      * @return Массив объектов.
      */
-    public Item[] findByName(String name) {
-        Item[] temp = new Item[position];
-        int count = 0;
-        for (int index = 0; index < this.items.length; index++) {
-            if (this.items[index] != null && (this.items[index].getName()).equals(name)) {
-                temp[count++] = this.items[index];
+    public List<Item> findByName(String name) {
+        List<Item> result = new ArrayList<>();
+        for (int index = 0; index < this.items.size(); index++) {
+            if (this.items.get(index) != null && (this.items.get(index).getName()).equals(name)) {
+                result.add(this.items.get(index));
             }
         }
-        Item[] result = new Item[count];
-        System.arraycopy(temp, 0, result, 0, count);
         return result;
     }
 
@@ -120,9 +111,9 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item item = null;
-        for (int index = 0; index < items.length; index++) {
-            if (items[index] != null && (items[index].getId()).equals(id)) {
-                item = items[index];
+        for (int index = 0; index < this.items.size(); index++) {
+            if (this.items.get(index) != null && (this.items.get(index).getId()).equals(id)) {
+                item = items.get(index);
                 break;
             }
         }

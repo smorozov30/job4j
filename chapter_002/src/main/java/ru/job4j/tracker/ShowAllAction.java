@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * Класс осуществляет действие вывода всех заявок.
  * @author smorozov30 (sergey.se1ove.morozov@gmail.com).
@@ -19,9 +21,9 @@ public class ShowAllAction extends BaseAction {
     @Override
     public boolean execute(Input input, Tracker tracker) {
         boolean result = false;
-        Item[] items = tracker.findAll();
-        if (items.length > 0) {
-            System.out.println(items.length + " items found:");
+        List<Item> items = tracker.findAll();
+        if (items.size() > 0) {
+            System.out.println(items.size() + " items found:");
             for (Item item : items) {
                 System.out.println(item.getName());
             }
