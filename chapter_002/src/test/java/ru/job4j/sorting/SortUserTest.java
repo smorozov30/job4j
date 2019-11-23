@@ -22,4 +22,23 @@ public class SortUserTest {
         List<User> expected = Arrays.asList(second, third, first);
         assertThat(result, is(expected));
     }
+    @Test
+    public void sortNameLengthMethodTest() {
+        User first = new User("sergei", 20);
+        User second = new User("ivan", 10);
+        User third = new User("vasya", 15);
+        List<User> result = new SortUser().sortNameLength(Arrays.asList(first, second, third));
+        List<User> expected = Arrays.asList(second, third, first);
+        assertThat(result, is(expected));
+    }
+    @Test
+    public void sortAllFieldsMethodTest() {
+        User first = new User("sergei", 20);
+        User second = new User("ivan", 10);
+        User third = new User("sergei", 15);
+        User fourth = new User("ivan", 12);
+        List<User> result = new SortUser().sortByAllFields(Arrays.asList(first, second, third, fourth));
+        List<User> expected = Arrays.asList(second, fourth, third, first);
+        assertThat(result, is(expected));
+    }
 }

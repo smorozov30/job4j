@@ -9,8 +9,20 @@ public class User implements Comparable {
         this.age = age;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
     @Override
     public int compareTo(Object o) {
         return ((this.age < ((User) o).age)) ? -1 : 1;
+    }
+
+    public String toString() {
+        return String.format(getName() + " : " + getAge());
     }
 }
