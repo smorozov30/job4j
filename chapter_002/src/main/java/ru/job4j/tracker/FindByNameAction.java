@@ -22,7 +22,6 @@ public class FindByNameAction extends BaseAction {
     public boolean execute(Input input, Tracker tracker) {
         boolean result = false;
         List<Item> items = tracker.findByName(input.askStr("Enter a name to search: "));
-        System.out.println();
         if (items.size() > 0) {
             System.out.println(items.size() + " items found:");
             for (Item item : items) {
