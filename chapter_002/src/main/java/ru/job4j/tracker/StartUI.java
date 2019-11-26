@@ -2,12 +2,19 @@ package ru.job4j.tracker;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Класс представляет консольное приложение для работы с классом Tracker.
  * @author smorozov30 (sergey.se1ove.morozov@gmail.com).
  */
 public class StartUI {
+    private final Consumer<String> output;
+
+    public StartUI(Consumer<String> output) {
+        this.output = output;
+    }
+
     /**
      * В методе выполняется работа с меню.
      * Пользователь вводит номер пункта меню и по требованию необходимые данные для выполнения требуемой операции.
@@ -17,21 +24,21 @@ public class StartUI {
     public void init(Input input, Tracker tracker, List<UserAction> actions) {
         boolean run = true;
         while (run) {
-            this.showMenu(actions);
-            System.out.println(actions.size() + ". ======== Exit =========");
+            this.showMenu(actions, output);
+            output.accept(actions.size() + ". ======== Exit =========");
             int select = input.askInt("Select: ", actions.size());
             UserAction action = actions.get(select);
-            run = action.execute(input, tracker);
+            run = action.execute(input, tracker, output);
         }
     }
 
     /**
      * Метод выводит в консоль пункты меню приложения.
      */
-    private void showMenu(List<UserAction> actions) {
+    private void showMenu(List<UserAction> actions, Consumer<String> output) {
         System.out.println("========== Menu ==========");
         for (int index = 0; index < actions.size(); index++) {
-            System.out.println(index + ". " + actions.get(index).name());
+            output.accept(index + ". " + actions.get(index).name());
         }
     }
 
@@ -51,6 +58,6 @@ public class StartUI {
                                 new FindByIdAction("=== Find item by Id ==="),
                                 new FindByNameAction("= Find items by name ==")
                                 );
-        new StartUI().init(validate, tracker, actions);
+        new StartUI(System.out::println).init(validate, tracker, actions);
     }
 }

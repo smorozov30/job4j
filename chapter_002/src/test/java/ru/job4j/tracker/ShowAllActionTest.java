@@ -19,7 +19,7 @@ public class ShowAllActionTest {
         Item item = new Item("fix bug");
         tracker.add(item);
         ShowAllAction act = new ShowAllAction("====== All Items ======");
-        act.execute(new StubInput(new String[] {}), tracker);
+        act.execute(new StubInput(new String[] {}), tracker, System.out::println);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("1 items found:")
                 .add(item.getName())

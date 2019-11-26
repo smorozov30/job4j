@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 /**
  * Класс осуществляет действие поиска заявки по id.
  * @author smorozov30 (sergey.se1ove.morozov@gmail.com).
@@ -17,14 +19,14 @@ public class FindByIdAction extends BaseAction {
      * @return результат выполнения добавления.
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
         boolean result = false;
         Item item = tracker.findById(input.askStr("Enter id: "));
         if (item != null) {
-            System.out.println("Item found: " + item.getName());
+            output.accept("Item found: " + item.getName());
             result = true;
         } else {
-            System.out.println("Item not found");
+            output.accept("Item not found");
         }
         return result;
     }

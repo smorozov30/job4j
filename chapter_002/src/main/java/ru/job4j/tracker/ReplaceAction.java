@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 /**
  * Класс осуществляет действие замены старой заявки - новой.
  * @author smorozov30 (sergey.se1ove.morozov@gmail.com).
@@ -17,19 +19,19 @@ public class ReplaceAction extends BaseAction {
      * @return результат выполнения добавления.
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
         boolean result = false;
         Item previous = tracker.findById(input.askStr("Enter id: "));
-        System.out.println();
+        output.accept("");
         if (previous != null) {
             Item next = new Item(input.askStr("Enter a name to replace: "));
             next.setId(previous.getId());
             tracker.replace(previous.getId(), next);
             result = true;
-            System.out.println();
-            System.out.println("Item replaced");
+            output.accept("");
+            output.accept("Item replaced");
         } else {
-            System.out.println("Item not found");
+            output.accept("Item not found");
         }
         return result;
     }

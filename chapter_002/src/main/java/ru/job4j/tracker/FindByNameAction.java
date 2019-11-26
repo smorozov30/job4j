@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Класс осуществляет действие поиска заявки по имени.
@@ -19,17 +20,17 @@ public class FindByNameAction extends BaseAction {
      * @return результат выполнения добавления.
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
         boolean result = false;
         List<Item> items = tracker.findByName(input.askStr("Enter a name to search: "));
         if (items.size() > 0) {
-            System.out.println(items.size() + " items found:");
+            output.accept(items.size() + " items found:");
             for (Item item : items) {
-                System.out.println(item.getName() + ": id(" + item.getId() + ")");
+                output.accept(item.getName() + ": id(" + item.getId() + ")");
             }
             result = true;
         } else {
-            System.out.println("Items not found");
+            output.accept("Items not found");
         }
         return result;
     }

@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 /**
  * Класс осуществляет действие добавления новой заявки.
  * @author smorozov30 (sergey.se1ove.morozov@gmail.com).
@@ -17,10 +19,10 @@ public class CreateAction extends BaseAction {
      * @return результат выполнения добавления.
      */
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
         Item item = new Item(input.askStr("Enter name: "));
         tracker.add(item);
-        System.out.println("Item added");
+        output.accept("Item added");
         return true;
     }
 }
