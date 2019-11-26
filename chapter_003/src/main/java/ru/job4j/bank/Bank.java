@@ -1,6 +1,7 @@
 package ru.job4j.bank;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Bank {
     private Map<User, List<Account>> users = new HashMap<>();
@@ -97,11 +98,11 @@ public class Bank {
      * @return - возвращает счет клиента, или null - если счет не найден.
      */
     private Account findAccount(String passport, String requisite) {
+        List<Account> list = this.getUserAccounts(passport).stream().filter(account -> account.getRequisites().
+                                                                    equals(requisite)).collect(Collectors.toList());
         Account found = null;
-        for (Account account : this.getUserAccounts(passport)) {
-            if (account.getRequisites().equals(requisite)) {
-                found = account;
-            }
+        if (!list.isEmpty()) {
+            found = list.get(0);
         }
         return found;
     }
