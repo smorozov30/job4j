@@ -21,12 +21,8 @@ public class Calculator {
         Calculator calc = new Calculator();
         calc.multiple(
                 0, 10, 2,
-                (value, index) -> {
-                    double result = value * index;
-                    System.out.printf("Multiple %s * %s = %s %n", value, index, result);
-                    return result;
-                },
-                result -> System.out.println(result)
+                MathUtil::add,
+                System.out::println
         );
     }
 }
