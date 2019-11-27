@@ -15,11 +15,9 @@ public class ConverterTest {
     public void whenEnterListGetMap() {
         Student first = new Student(10, "Morozov");
         Student second = new Student(10, "Ivanov");
-        List<Student> students = Arrays.asList(first, second, first);
+        List<Student> students = List.of(first, second, first);
         Map<String, Student> result = new Converter().convert(students);
-        Map<String, Student> expected = new HashMap<>();
-        expected.put("Morozov", first);
-        expected.put("Ivanov", second);
+        Map<String, Student> expected = Map.of("Morozov", first, "Ivanov", second);
         assertThat(result, is(expected));
     }
 }

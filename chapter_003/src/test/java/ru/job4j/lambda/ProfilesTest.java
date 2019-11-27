@@ -25,15 +25,15 @@ public class ProfilesTest {
     }
     @Test
     public void whenReturnList5Addresses() {
-        List<Profile> list = Arrays.asList(new Profile(first), new Profile(second), new Profile(third));
+        List<Profile> list = List.of(new Profile(first), new Profile(second), new Profile(third));
         List<Address> result = new Profiles().collect(list);
         assertThat(result.size(), is(3));
     }
     @Test
     public void whenGetUniqueAndSortedList() {
-        List<Profile> listProfiles = Arrays.asList(new Profile(first), new Profile(second), new Profile(third), new Profile(fourth));
+        List<Profile> listProfiles = List.of(new Profile(first), new Profile(second), new Profile(third), new Profile(fourth));
         List<Address> result = new Profiles().getUniqueList(listProfiles);
-        List<Address> expected = Arrays.asList(second, first, fourth);
+        List<Address> expected = List.of(second, first, fourth);
         assertThat(result, is(expected));
     }
 }

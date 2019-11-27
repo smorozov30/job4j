@@ -14,7 +14,7 @@ public class SchoolTest {
     private School school;
     @Before
     public void initBeforeTests() {
-         students = Arrays.asList(new Student(10), new Student(20), new Student(30),
+         students = List.of(new Student(10), new Student(20), new Student(30),
                 new Student(40), new Student(50), new Student(60),
                 new Student(70), new Student(80), new Student(90),
                 new Student(100));

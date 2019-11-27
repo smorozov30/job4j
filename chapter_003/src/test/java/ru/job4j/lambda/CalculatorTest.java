@@ -17,6 +17,6 @@ public class CalculatorTest {
                 MathUtil::add,
                 buffer::add
         );
-        assertThat(buffer, is(Arrays.asList(1D, 2D, 3D)));
+        assertThat(buffer, is(List.of(1D, 2D, 3D)));
     }
 }

@@ -17,7 +17,7 @@ public class SortStudentTest {
         Student fourth = new Student(30);
         List<Student> students = Arrays.asList(first, null, second, null, third, null, fourth);
         List<Student> result = new SortStudent().levelOf(students, 60);
-        List<Student> expected = Arrays.asList(third, first);
+        List<Student> expected = List.of(third, first);
         assertThat(result, is(expected));
     }
 }

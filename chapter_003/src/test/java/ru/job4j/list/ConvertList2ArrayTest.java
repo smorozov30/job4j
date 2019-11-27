@@ -29,11 +29,9 @@ public class ConvertList2ArrayTest {
     @Test
     public void convertMethod() {
         ConvertList2Array convertList = new ConvertList2Array();
-        List<int[]> listArrays = new ArrayList<>();
-        listArrays.add(new int[]{1, 2});
-        listArrays.add(new int[]{3, 4, 5, 6});
+        List<int[]> listArrays = List.of(new int[]{1, 2}, new int[]{3, 4, 5, 6});
         List<Integer> result = convertList.convert(listArrays);
-        List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> expect = List.of(1, 2, 3, 4, 5, 6);
         assertThat(result, is(expect));
     }
 }
