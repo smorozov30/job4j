@@ -13,18 +13,6 @@ public class EvenNumbersIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        return search();
-    }
-
-    @Override
-    public Integer next() {
-        if (!search()) {
-            throw new NoSuchElementException();
-        }
-        return value[index++];
-    }
-
-    private boolean search() {
         boolean result = false;
         for (int i = index; i < value.length; i++) {
             if (value[i] % 2 == 0) {
@@ -34,5 +22,13 @@ public class EvenNumbersIterator implements Iterator<Integer> {
             }
         }
         return result;
+    }
+
+    @Override
+    public Integer next() {
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
+        return value[index++];
     }
 }

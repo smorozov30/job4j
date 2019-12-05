@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 
-public class EvenIteratorTest {
+public class EvenNumbersIteratorTest {
 
     private Iterator<Integer> it;
 
