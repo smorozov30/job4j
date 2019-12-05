@@ -10,26 +10,24 @@ public class IteratorOfIterators {
 
             @Override
             public boolean hasNext() {
-                return this.check();
+                boolean result = false;
+                while (it.hasNext() || iterator.hasNext()) {
+                    if (iterator.hasNext()) {
+                        result = true;
+                        break;
+                    } else {
+                        iterator = it.next();
+                    }
+                }
+                return result;
             }
 
             @Override
             public Integer next() {
-                if (!check()) {
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
                 return iterator.next();
-            }
-
-            private boolean check() {
-                boolean result = false;
-                if (iterator.hasNext()) {
-                    result = true;
-                } else if (it.hasNext()) {
-                    iterator = it.next();
-                    result = iterator.hasNext();
-                }
-                return result;
             }
         };
     }
