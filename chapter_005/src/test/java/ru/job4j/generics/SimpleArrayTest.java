@@ -55,12 +55,12 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void whenSetIndex1Number9ReturnNumber9() {
+    public void whenSetIndex1Number9ReturnTrue() {
         assertThat(numbers.set(1, 9), is(true));
     }
 
     @Test
-    public void whenSetIndex1StringWorkReturnWork() {
+    public void whenSetIndex1StringWorkReturnTrue() {
         assertThat(strings.set(1, "Work"), is(true));
     }
 
@@ -69,9 +69,9 @@ public class SimpleArrayTest {
         assertThat(strings.remove(1), is(true));
     }
 
-    @Test
-    public void whenRemoveBeyondTheRangeReturnFalse() {
-        assertThat(strings.remove(4), is(false));
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void whenRemoveBeyondTheRangeReturnException() {
+        strings.remove(4);
     }
 
     @Test(expected = NoSuchElementException.class)

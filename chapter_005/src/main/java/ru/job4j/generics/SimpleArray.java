@@ -1,5 +1,6 @@
 package ru.job4j.generics;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -21,32 +22,26 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public boolean set(int index, T element) {
-        boolean result = false;
-        if (index >= 0 && index < this.array.length) {
-            this.array[index] = element;
-            result = true;
-        }
-        return result;
+        this.checkIndex(index);
+        this.array[index] = element;
+        return true;
     }
 
     public boolean remove(int index) {
-        boolean result = false;
-        if (index >= 0 && index < this.array.length && this.array[index] != null) {
-            for ( ; index < this.array.length - 1; index++) {
-                this.array[index] = this.array[index + 1];
-            }
-            this.array[index] = null;
-            this.position--;
-            result = true;
-        }
-        return result;
+        this.checkIndex(index);
+        System.arraycopy(this.array, index + 1, this.array, index, this.array.length - index - 1);
+        return true;
     }
 
     public T get(int index) {
-        if (index < 0 && index >= this.array.length) {
+        this.checkIndex(index);
+        return this.array[index];
+    }
+
+    private void checkIndex(int index) {
+        if (index < 0 || index >= this.position) {
             throw new ArrayIndexOutOfBoundsException("Вышли за границы контейнера.");
         }
-        return this.array[index];
     }
 
     @Override
@@ -56,7 +51,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                 return positionIterator < array.length && array[positionIterator] != null;
+                 return this.positionIterator < position;
             }
 
             @Override
@@ -68,4 +63,5 @@ public class SimpleArray<T> implements Iterable<T> {
             }
         };
     }
+    ArrayList<String> test = new ArrayList<>();
 }
