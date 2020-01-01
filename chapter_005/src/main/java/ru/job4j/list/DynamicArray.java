@@ -19,9 +19,7 @@ public class DynamicArray<E> implements Iterable<E> {
 
     public boolean add(E element) {
         if (this.position >= this.container.length) {
-            Object[] temp = this.container.clone();
-            this.container = new Object[this.container.length * 2 + 1];
-            System.arraycopy(temp, 0, this.container, 0, temp.length);
+            this.expand();
         }
         this.container[position++] = element;
         this.modCount++;
@@ -38,6 +36,13 @@ public class DynamicArray<E> implements Iterable<E> {
     public int size() {
         return this.position;
     }
+
+    private void expand() {
+        Object[] temp = this.container.clone();
+        this.container = new Object[this.container.length * 2 + 1];
+        System.arraycopy(temp, 0, this.container, 0, temp.length);
+    }
+
 
     @Override
     public Iterator<E> iterator() {
