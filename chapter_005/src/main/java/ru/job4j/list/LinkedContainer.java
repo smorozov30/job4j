@@ -26,6 +26,10 @@ public class LinkedContainer<E> implements Iterable<E> {
         return this.container.get(index);
     }
 
+    public E delete() {
+        return this.container.delete();
+    }
+
     public int size() {
         return this.size;
     }
