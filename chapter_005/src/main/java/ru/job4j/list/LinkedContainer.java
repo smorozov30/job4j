@@ -33,15 +33,15 @@ public class LinkedContainer<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            private int cursor = 0;
             private int expectedModCount = modCount;
+            private Node.Data<E> next = container.getFirst();
 
             @Override
             public boolean hasNext() {
                 if (this.expectedModCount != modCount) {
                     throw new ConcurrentModificationException("Коллекция была изменена.");
                 }
-                return this.cursor < size;
+                return this.next != null;
             }
 
             @Override
@@ -49,7 +49,9 @@ public class LinkedContainer<E> implements Iterable<E> {
                 if (!this.hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return container.get(cursor++);
+                E result = this.next.data;
+                this.next = this.next.next;
+                return result;
             }
         };
     }
@@ -75,6 +77,10 @@ public class LinkedContainer<E> implements Iterable<E> {
                 result = result.next;
             }
             return result.data;
+        }
+
+        public Data<E> getFirst() {
+            return this.first;
         }
 
         private static class Data<E> {
