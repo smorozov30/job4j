@@ -1,6 +1,8 @@
 package ru.job4j.list;
 
-public class SimpleStack<T> {
+import java.util.Iterator;
+
+public class SimpleStack<T> implements Iterable<T> {
     private LinkedContainer<T> container = new LinkedContainer<>();
 
     public void push(T value) {
@@ -9,5 +11,10 @@ public class SimpleStack<T> {
 
     public T poll() {
         return this.container.delete();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return this.container.iterator();
     }
 }
