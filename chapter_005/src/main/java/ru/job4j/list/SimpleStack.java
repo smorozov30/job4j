@@ -13,6 +13,10 @@ public class SimpleStack<T> implements Iterable<T> {
         return this.container.delete();
     }
 
+    public int size() {
+        return this.container.size();
+    }
+
     @Override
     public Iterator<T> iterator() {
         return this.container.iterator();

@@ -27,6 +27,8 @@ public class LinkedContainer<E> implements Iterable<E> {
     }
 
     public E delete() {
+        this.modCount++;
+        this.size--;
         return this.container.delete();
     }
 
