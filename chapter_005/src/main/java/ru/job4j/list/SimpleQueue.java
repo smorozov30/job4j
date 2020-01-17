@@ -2,21 +2,19 @@ package ru.job4j.list;
 
 public class SimpleQueue<T> {
     private SimpleStack<T> first = new SimpleStack<>();
-    private SimpleStack<T> back;
+    private SimpleStack<T> reverse = new SimpleStack<>();;
 
     public T poll() {
-        back = new SimpleStack<>();
-        for (T t : this.first) {
-            this.back.push(t);
-        }
-        T result = back.poll();
-        first = new SimpleStack<>();
-        for (T t : this.back) {
-            this.first.push(t);
-        }
-        return result;
+        this.pass(this.first, this.reverse);
+        return reverse.poll();
     }
     public void push(T value) {
+        this.pass(this.reverse, this.first);
         this.first.push(value);
+    }
+    private void pass(SimpleStack<T> first, SimpleStack<T> second) {
+        while (first.size() > 0) {
+            second.push(first.poll());
+        }
     }
 }
