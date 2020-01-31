@@ -18,11 +18,11 @@ public class Analizy {
                     forEach(line -> {
                         List<String> pair = new ArrayList<>(Arrays.asList(line.split(" ")));
                         int code = Integer.parseInt(pair.get(0));
-                        if (worked && code == 400 || code == 500) {
+                        if (worked && (code == 400 || code == 500)) {
                             out.print(pair.get(1) + ";");
                             worked = false;
                         }
-                        if (!worked && code == 200 || code == 300) {
+                        if (!worked && (code == 200 || code == 300)) {
                             out.println(pair.get(1) + ";");
                             worked = true;
                         }
