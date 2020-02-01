@@ -1,5 +1,8 @@
 package ru.job4j.tree;
 
+import ru.job4j.list.SimpleQueue;
+import ru.job4j.list.SimpleStack;
+
 import java.util.*;
 
 /**
@@ -77,19 +80,20 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<>() {
-            private int cursor = 0;
             private int expectedModCount = modCount;
-            private List<E> values;
+            SimpleQueue<Node<E>> stack = new SimpleQueue<>();
+            private boolean stackIsEmpty = true;
 
             @Override
             public boolean hasNext() {
                 if (this.expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                if (this.values == null) {
-                     this.getAllValues();
+                if (this.stackIsEmpty) {
+                    this.stack.push(root);
+                    this.stackIsEmpty = false;
                 }
-                return this.cursor < this.values.size();
+                return this.stack.size() > 0;
             }
 
             @Override
@@ -97,22 +101,14 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return this.values.get(this.cursor++);
-            }
-
-            /**
-             * Метод при работе с итератором, заполняет список values значениями дерева,
-             * для последующего прохода итератора по всем элементам находящимся в value.
-             */
-            private void getAllValues() {
-                Queue<Node<E>> elements = new LinkedList<>();
-                this.values = new ArrayList<>();
-                elements.offer(root);
-                while (!elements.isEmpty()) {
-                    Node<E> el = elements.poll();
-                    this.values.add(el.getValue());
-                    elements.addAll(el.leaves());
+                Node<E> element = stack.poll();
+                List<Node<E>> children = element.leaves();
+                if (children.size() > 0) {
+                    for (Node<E> child : children) {
+                        this.stack.push(child);
+                    }
                 }
+                return element.getValue();
             }
         };
     }
