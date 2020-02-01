@@ -66,12 +66,16 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      */
     public boolean isBinary() {
         boolean result = true;
-        for (E element : this) {
-            Optional<Node<E>> rsl = this.findBy(element);
-            Node<E> node = rsl.get();
-            if (node.leaves().size() > 2) {
+        SimpleQueue<Node<E>> stack = new SimpleQueue<>();
+        stack.push(this.root);
+        while (stack.size() > 0) {
+            List<Node<E>> children = stack.poll().leaves();
+            if (children.size() > 2) {
                 result = false;
                 break;
+            }
+            for (Node<E> child : children) {
+                stack.push(child);
             }
         }
         return result;
@@ -103,10 +107,8 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                 }
                 Node<E> element = stack.poll();
                 List<Node<E>> children = element.leaves();
-                if (children.size() > 0) {
-                    for (Node<E> child : children) {
-                        this.stack.push(child);
-                    }
+                for (Node<E> child : children) {
+                    this.stack.push(child);
                 }
                 return element.getValue();
             }
