@@ -2,10 +2,11 @@ package ru.job4j.io;
 
 import java.io.File;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class Search {
 
-    public List<File> getFiles(String parent, List<String> exts) {
+    public List<File> getFiles(String parent, Predicate<String> predicate) {
         File start = new File(parent);
         List<File> files = new ArrayList<>();
         Queue<File> data = new LinkedList<>();
@@ -17,12 +18,8 @@ public class Search {
                     data.offer(child);
                 }
             } else {
-                String extFile = (el.getName()).split("\\.")[1];
-                for (String ext : exts) {
-                    if (extFile.equals(ext)) {
-                        files.add(el);
-                        break;
-                    }
+                if (predicate.test(el.getName())) {
+                    files.add(el);
                 }
             }
         }
