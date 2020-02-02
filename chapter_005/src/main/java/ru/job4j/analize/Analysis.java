@@ -1,13 +1,17 @@
 package ru.job4j.analize;
 
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Analysis {
 
     /**
      * Метод определяет рязницу между начальным состоянием коллекции и текущим.
-     * В циклах проходим по коллекциям и определяем сколько элементов изменилось(changed++) и осталось
+     * Предыдущую коллекцию(previous) вводим к карту, используя как ключ id объекта User,
+     * а значение - объект User.Проходим в цикле по второй коллекции(current) и проверяем
+     * содержится ли объекты из коллекции в карте.
+     * Определяем сколько элементов изменилось(changed++) и осталось
      * неизменными(noChanged++) в текущей коллекции по сравнению с начальной коллекцией.
      *      Вычисляем разницу:
      * remained = noChange + changes - количество объектов присутствующих в обоих коллекциях.
@@ -19,20 +23,20 @@ public class Analysis {
      * @param current - текущая коллекция объектов User.
      * @return - объект класса Info, содержащий количество изменений в коллекции.
      */
+
     public Info diff(List<User> previous, List<User> current) {
         Info changes = new Info();
+        Map<Integer, User> prev = new HashMap<>();
         int noChange = 0;
         for (User prevUser : previous) {
-            Iterator<User> iterator = current.iterator();
-            while (iterator.hasNext()) {
-                User currUser = iterator.next();
-                if (prevUser.id == currUser.id) {
-                    if (prevUser.name.equals(currUser.name)) {
-                        noChange++;
-                    } else {
-                        changes.changed++;
-                    }
-                    break;
+            prev.put(prevUser.id, prevUser);
+        }
+        for (User currUser : current) {
+            if (prev.containsKey(currUser.id)) {
+                if (prev.get(currUser.id).name.equals(currUser.name)) {
+                    noChange++;
+                } else {
+                    changes.changed++;
                 }
             }
         }
