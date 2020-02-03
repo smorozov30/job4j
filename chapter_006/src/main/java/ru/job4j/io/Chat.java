@@ -8,8 +8,11 @@ import java.util.Scanner;
 
 public class Chat {
     private List<String> answers;
-    private BufferedWriter writer;
+    private List<String> writing;
     private Scanner scanner;
+    private static final String PAUSE_ON = "стоп";
+    private static final String PAUSE_OFF = "продолжить";
+    private static final String EXIT = "закончить";
 
     /**
      * Метод ведет диалог с пользователем.
@@ -25,43 +28,40 @@ public class Chat {
         if (this.answers == null) {
             this.fillAnswers();
         }
-        boolean recording = true;
-        try {
-            String userInput = this.getInput();
-            while (!userInput.equals("закончить")) {
-                if (userInput.equals("стоп")) {
-                    this.write(userInput);
-                    recording = false;
-                } else if (userInput.equals("продолжить")) {
-                    this.write(userInput);
-                    recording = true;
-                } else if (recording) {
-                    this.write(userInput);
-                    String answer = getAnswer();
-                    System.out.println(answer);
-                    this.write(answer);
-                }
-                userInput = this.getInput();
-            }
-            this.write(userInput);
-            this.writer.close();
-            this.scanner.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (this.writing == null) {
+            this.writing = new ArrayList<>();
         }
+        boolean recording = true;
+        String userInput = this.getInput();
+        while (!userInput.equals(EXIT)) {
+            if (userInput.equals(PAUSE_ON)) {
+                this.writing.add(userInput);
+                recording = false;
+            } else if (userInput.equals(PAUSE_OFF)) {
+                this.writing.add(userInput);
+                recording = true;
+            } else if (recording) {
+                this.writing.add(userInput);
+                String answer = getAnswer();
+                System.out.println(answer);
+                this.writing.add(answer);
+            }
+            userInput = this.getInput();
+        }
+        this.writing.add(userInput);
+        this.write();
+        this.scanner.close();
     }
 
     /**
      * Метод записывает строки диалога в файл log.txt.
-     * @param input - строка которую нужно записать.
      */
-    private void write(String input) {
-        try {
-            if (this.writer == null) {
-                this.writer = new BufferedWriter(new FileWriter("./log.txt"));
+    private void write() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("./log.txt"))) {
+            for (String string : this.writing) {
+                writer.write(string + System.lineSeparator());
+                writer.flush();
             }
-            this.writer.write(input + "\n");
-            this.writer.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
