@@ -15,9 +15,9 @@ public class SearchTest {
     @Test
     public void when9FileOutOf12AreSelected() {
         int cursor = 0;
-        List<File> result = new Search().getFiles("./chapter_006/src/main/java/ru/job4j/io/tmpdir", s -> s.endsWith(".java"));
-        List<String> expected = new ArrayList<>(Arrays.asList("First.java", "Second.java", "Third.java", "Fifth.java",
-                                                              "Fourth.java",  "Seventh.java", "Sixth.java"
+        List<File> result = new Search().files("./chapter_006/src/main/java/ru/job4j/io/tmpdir", Arrays.asList(".java", ".txt"));
+        List<String> expected = new ArrayList<>(Arrays.asList("First.java", "Second.java", "Third.java", "firstTXT.txt",
+                                                     "secondTXT.txt", "Fifth.java",  "Fourth.java",  "Seventh.java", "Sixth.java"
                                                 ));
         for (File file : result) {
             assertThat(file.getName().equals(expected.get(cursor++)), is(true));
