@@ -1,8 +1,8 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -12,11 +12,11 @@ public class Zip {
      * Метод находит по предикату все файлы в переденной директории(root), которые
      * будут добавлены в архив.
      * @param root - путь к директории, которую нужно архивировать.
-     * @param predicate - критерий отбора файлов для архивации.
+     * @param exts - расширения для отбора файлов для архивации.
      * @return - коллекцию файлов для архивации.
      */
-    public List<File> seekBy(String root, Predicate<String> predicate) {
-        return new Search().getFiles(root, predicate);
+    public List<File> seekBy(String root, List<String> exts) {
+        return new Search().files(root, exts);
     }
 
     /**
@@ -45,7 +45,7 @@ public class Zip {
      */
     public static void main(String[] args) {
         Args arguments = new Args(args);
-       List<File> list = new Zip().seekBy(arguments.directory(), s -> !s.matches("\\W*[a-zA-Z]+\\." + arguments.exclude()));
+        List<File> list = new Zip().seekBy(arguments.directory(), Arrays.asList(arguments.exclude()));
         new Zip().pack(list, new File("./" + arguments.output()));
     }
 }
