@@ -39,8 +39,8 @@ SELECT * FROM product
 WHERE name LIKE '%мороженое%';
 
 --запрос, который выводит все продукты, срок годности которых заканчивается в следующем месяце.
-SELECT * FROM product
-WHERE expired_date BETWEEN '2020-03-01' AND '2020-03-31';
+SELECT name, expired_date FROM product
+WHERE EXTRACT(MONTH FROM expired_date) = EXTRACT(MONTH FROM NOW())  + 1;
 
 --запрос, который выводит самый дорогой продукт.
 SELECT name, MAX(price) FROM product
@@ -57,8 +57,10 @@ SELECT * FROM product as p
 INNER JOIN type as t on p.type_id = t.id AND (t.name = 'СЫР' OR t.name = 'МОЛОКО');
 
 --запрос, который выводит тип продуктов, которых осталось меньше 4 штук.  
-SELECT name FROM type
-WHERE (SELECT COUNT(id) FROM product WHERE type_id = type.id)  < 4;
+SELECT t.name, COUNT(p.id) FROM product as p
+INNER JOIN type as t on p.type_id = t.id
+GROUP BY t.name
+HAVING COUNT(p.id) < 4;
 
 --Вывести все продукты и их тип.
 SELECT p.name, t.name FROM product as p
