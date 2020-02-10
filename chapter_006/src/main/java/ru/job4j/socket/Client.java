@@ -15,10 +15,10 @@ public class Client {
     }
 
     public void start() {
-        try {
-            PrintWriter out = new PrintWriter(this.socket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-            BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+        try (PrintWriter out = new PrintWriter(this.socket.getOutputStream(), true);
+             BufferedReader in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+             BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in))
+            ) {
             do {
                 out.println(userInput.readLine());
                 String str;
