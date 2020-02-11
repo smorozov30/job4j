@@ -15,7 +15,7 @@ public class ShowAllActionTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         PrintStream def = System.out;
         System.setOut(new PrintStream(out));
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Item item = new Item("fix bug");
         tracker.add(item);
         ShowAllAction act = new ShowAllAction("====== All Items ======");

@@ -15,7 +15,7 @@ public class FindByNameActionTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         PrintStream def = System.out;
         System.setOut(new PrintStream(out));
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Item item = new Item("fix bug");
         tracker.add(item);
         FindByNameAction fbna = new FindByNameAction("= Find items by name ==");

@@ -19,7 +19,7 @@ public class DeleteAction extends BaseAction {
      * @return результат выполнения добавления.
      */
     @Override
-    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
+    public boolean execute(Input input, ITracker tracker, Consumer<String> output) {
         String id = input.askStr("Enter id: ");
         boolean result = tracker.delete(id);
         output.accept(result ? "Item deleted" : "Item not found");

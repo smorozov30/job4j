@@ -21,7 +21,7 @@ public class StartUI {
      * @param input объект класса ValidateInput, используется для ввода данных с консоли.
      * @param tracker объект класса Tracker, является оберткой для массива заявок, используется для работы с заявками.
      */
-    public void init(Input input, Tracker tracker, List<UserAction> actions) {
+    public void init(Input input, ITracker tracker, List<UserAction> actions) {
         boolean run = true;
         while (run) {
             this.showMenu(actions, output);
@@ -49,7 +49,7 @@ public class StartUI {
     public static void main(String[] args) {
         Input input = new ConsoleInput();
         Input validate = new ValidateInput(input);
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         List<UserAction> actions = Arrays.asList(
                                 new CreateAction("= Create a new Item ==="),
                                 new ShowAllAction("====== All Items ======"),

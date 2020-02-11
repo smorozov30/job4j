@@ -20,7 +20,7 @@ public class FindByNameAction extends BaseAction {
      * @return результат выполнения добавления.
      */
     @Override
-    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
+    public boolean execute(Input input, ITracker tracker, Consumer<String> output) {
         boolean result = false;
         List<Item> items = tracker.findByName(input.askStr("Enter a name to search: "));
         if (items.size() > 0) {

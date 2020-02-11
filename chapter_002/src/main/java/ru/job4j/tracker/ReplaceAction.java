@@ -19,7 +19,7 @@ public class ReplaceAction extends BaseAction {
      * @return результат выполнения добавления.
      */
     @Override
-    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
+    public boolean execute(Input input, ITracker tracker, Consumer<String> output) {
         boolean result = false;
         Item previous = tracker.findById(input.askStr("Enter id: "));
         output.accept("");
