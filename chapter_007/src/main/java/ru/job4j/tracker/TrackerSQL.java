@@ -1,37 +1,23 @@
 package ru.job4j.tracker;
 
-import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
 
 public class TrackerSQL implements ITracker, AutoCloseable {
     private Connection connection;
-    private String config;
     private static final Random RANDOM = new Random();
     private int position = 0;
 
-    public TrackerSQL(String config) {
-        this.config = config;
+    public TrackerSQL(Connection connection) {
+        this.connection = connection;
     }
 
     /**
      * Метод создает подключение к базе данных по config.
      * @return результат подключения.
      */
-    public boolean init() {
-        try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream(this.config)) {
-            Properties config = new Properties();
-            config.load(in);
-            Class.forName(config.getProperty("driver-class-name"));
-            this.connection = DriverManager.getConnection(
-                                                            config.getProperty("url"),
-                                                            config.getProperty("username"),
-                                                            config.getProperty("password")
-                                                         );
-            this.tableCheck();
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        }
+    public boolean checkConnection() {
+        this.tableCheck();
         return this.connection != null;
     }
 
