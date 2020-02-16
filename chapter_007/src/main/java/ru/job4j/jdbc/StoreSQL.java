@@ -18,7 +18,7 @@ public class StoreSQL implements AutoCloseable {
      */
     private void init() {
         try {
-            this.connection = DriverManager.getConnection(config.get("url"));
+            this.connection = DriverManager.getConnection(config.get("url"), config.get("username"), config.get("password"));
             this.connection.setAutoCommit(false);
             this.tableCheck();
         } catch (Exception e) {
@@ -28,16 +28,24 @@ public class StoreSQL implements AutoCloseable {
 
     /**
      * Метод создает таблицу в базе если она не существовала ранее.
-     * @throws SQLException
      */
-    private void tableCheck() throws SQLException {
-        PreparedStatement st = connection.prepareStatement("CREATE TABLE IF NOT EXISTS entry "
-                + "("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
-                + "field INT"
-                + ");"
-        );
-        st.executeUpdate();
+    private void tableCheck() {
+        try (PreparedStatement st = connection.prepareStatement("CREATE TABLE IF NOT EXISTS entry "
+                                                                    + "("
+                                                                    + "id INT PRIMARY KEY NOT NULL,"
+                                                                    + "field INT"
+                                                                    + ");"
+                                                            )) {
+            st.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -46,13 +54,20 @@ public class StoreSQL implements AutoCloseable {
      */
     public void generate(int n) {
         this.cleaning();
-        try (PreparedStatement st = connection.prepareStatement("INSERT INTO entry (field) VALUES (?);")) {
+        try (PreparedStatement st = connection.prepareStatement("INSERT INTO entry (id, field) VALUES (?, ?);")) {
             for (int count = 1; count <= n; count++) {
                 st.setInt(1, count);
-                st.executeUpdate();
+                st.setInt(2, count);
+                st.addBatch();
             }
+            st.executeBatch();
             connection.commit();
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             e.printStackTrace();
         }
     }
@@ -63,7 +78,13 @@ public class StoreSQL implements AutoCloseable {
     private void cleaning() {
         try (PreparedStatement st = connection.prepareStatement("DELETE FROM entry")) {
             st.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             e.printStackTrace();
         }
     }
