@@ -38,15 +38,19 @@ public class TrackerSQL implements ITracker, AutoCloseable {
      * Метод создает таблицу items если она не существует в базе.
      * @throws SQLException
      */
-    private void tableCheck() throws SQLException {
-        PreparedStatement st = connection.prepareStatement("CREATE TABLE IF NOT EXISTS items "
-                                                                + "("
-                                                                + "id SERIAL PRIMARY KEY, "
-                                                                + "item_id VARCHAR(30),"
-                                                                + "name VARCHAR(50)"
-                                                                + ");"
-                                                            );
-        st.executeUpdate();
+    private void tableCheck() {
+        try (PreparedStatement st = connection.prepareStatement("CREATE TABLE IF NOT EXISTS items "
+                                                                    + "("
+                                                                    + "id INT PRIMARY KEY, "
+                                                                    + "item_id VARCHAR(30),"
+                                                                    + "name VARCHAR(50)"
+                                                                    + ");"
+                                                            )) {
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -88,8 +92,9 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         try (PreparedStatement st = connection.prepareStatement("UPDATE items SET name = ? WHERE item_id = ?")) {
             st.setString(1, item.getName());
             st.setString(2, id);
-            st.executeUpdate();
-            result = true;
+            if (st.executeUpdate() > 0) {
+                result = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -106,8 +111,9 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         boolean result = false;
         try (PreparedStatement st = connection.prepareStatement("DELETE FROM items WHERE item_id = ?")) {
             st.setString(1, id);
-            st.executeUpdate();
-            result = true;
+            if (st.executeUpdate() > 0) {
+                result = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
