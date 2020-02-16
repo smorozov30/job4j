@@ -8,6 +8,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     private Connection connection;
     private String config;
     private static final Random RANDOM = new Random();
+    private int position = 0;
 
     public TrackerSQL(String config) {
         this.config = config;
@@ -69,11 +70,12 @@ public class TrackerSQL implements ITracker, AutoCloseable {
      */
     @Override
     public Item add(Item item) {
-        try (PreparedStatement st = connection.prepareStatement("INSERT INTO items (item_id, name) VALUES (?, ?)")) {
+        try (PreparedStatement st = connection.prepareStatement("INSERT INTO items (id, item_id, name) VALUES (?, ?, ?)")) {
             String id = this.generateId();
             item.setId(id);
-            st.setString(1, id);
-            st.setString(2, item.getName());
+            st.setInt(1, this.position++);
+            st.setString(2, id);
+            st.setString(3, item.getName());
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
