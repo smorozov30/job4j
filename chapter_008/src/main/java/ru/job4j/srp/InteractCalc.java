@@ -1,5 +1,8 @@
 package ru.job4j.srp;
 
+import ru.job4j.ocp.CosAction;
+import ru.job4j.ocp.SinAction;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,7 +48,9 @@ public class InteractCalc {
                 new AddAction("====== add ====="),
                 new SubtractAction("====== subtract ======"),
                 new MultipleAction("===== multiple ======="),
-                new DivideAction("===== divide =====")
+                new DivideAction("===== divide ====="),
+                new CosAction("=== cos ===="),
+                new SinAction(" ==== sin ====")
         );
         Input input = new ConsoleInput();
         Output output = new ConsoleOutput();
