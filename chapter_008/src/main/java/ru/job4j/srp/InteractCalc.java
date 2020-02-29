@@ -1,94 +1,54 @@
 package ru.job4j.srp;
 
-import ru.job4j.calculator.Calculator;
-
-import java.util.Scanner;
+import java.util.Arrays;
+import java.util.List;
 
 public class InteractCalc {
-    private double first;
-    private double second;
-    private double result;
-    private String operation;
-    private Scanner scanner;
+    private CalculateAction lastAct;
+    private double lastCalc;
 
-    public void start() {
-        this.scanner = new Scanner(System.in);
+
+    public void start(List<CalculateAction> actions, Input input, Output output) {
         while (true) {
-            this.showMenu();
-            int in = Integer.parseInt(this.input("Выберите пункт меню."));
-            if (in == 1) {
-                this.useLastResult();
-            }
-            if (in == 2) {
-                this.repeatOperation();
-            }
-            if (in == 3) {
-                this.calc();
-            }
-            if (in == 4) {
+            this.showMenu(actions, output);
+            CalculateAction action = null;
+            int index = Integer.parseInt(input.input(output, "Введите пункт меню:"));
+            if (index == actions.size()) {
+                this.lastCalc = lastAct.execute(input, output);
+            } else if (index == actions.size() + 1) {
+                index = Integer.parseInt(input.input(output, "Выберите операцию:"));
+                action = actions.get(index);
+                this.lastAct = action;
+                this.lastCalc = action.execute(input, output, this.lastCalc);
+            } else if (index == actions.size() + 2) {
                 break;
+            } else {
+                action = actions.get(index);
+                this.lastAct = action;
+                this.lastCalc = action.execute(input, output);
             }
         }
-        this.scanner.close();
     }
 
-    public void calc() {
-        this.first = Double.parseDouble(this.input("Введите первое число:"));
-        this.operation = this.input("Введите операцию:");
-        this.second = Double.parseDouble(this.input("Введите второе число:"));
-        this.calculate();
-        this.output();
-    }
-
-    public void useLastResult() {
-        this.first = this.result;
-        this.operation = this.input("Введите операцию:");
-        this.second = Double.parseDouble(this.input("Введите второе число:"));
-        this.calculate();
-        this.output();
-    }
-
-    public void repeatOperation() {
-        this.first = Double.parseDouble(this.input("Введите первое число:"));
-        this.second = Double.parseDouble(this.input("Введите второе число:"));
-        this.calculate();
-        this.output();
-    }
-
-    public void showMenu() {
-        System.out.println("1. Использовать последнее вычисление.");
-        System.out.println("2. Использовать предыдущую операцию.");
-        System.out.println("3. Считать.");
-        System.out.println("4. Выход.");
-    }
-
-    public String input(String text) {
-        System.out.println(text);
-        return this.scanner.next();
-    }
-
-    public void output() {
-        System.out.println(this.result);
-    }
-
-    public void calculate() {
-        if (operation.equals("+")) {
-            this.result = Calculator.add(this.first, this.second);
+    private void showMenu(List<CalculateAction> actions, Output output) {
+        for (int i = 0; i < actions.size(); i++) {
+            output.output(String.format("%d. %s", i, actions.get(i).getName()));
         }
-        if (operation.equals("-")) {
-            this.result = Calculator.substract(this.first, this.second);
-        }
-        if (operation.equals("*")) {
-            this.result = Calculator.multiple(this.first, this.second);
-        }
-        if (operation.equals("/")) {
-            this.result = Calculator.div(this.first, this.second);
-        }
+        output.output(String.format("%d. == Повтор операции ==", actions.size()));
+        output.output(String.format("%d. == Использовать предыдущее вычисление ==", actions.size() + 1));
+        output.output(String.format("%d. ===== Выход =====", actions.size() + 2));
     }
 
     public static void main(String[] args) {
-        new InteractCalc().start();
+        InteractCalc calculator = new InteractCalc();
+        List<CalculateAction> actions = Arrays.asList(
+                new AddAction("====== add ====="),
+                new SubtractAction("====== subtract ======"),
+                new MultipleAction("===== multiple ======="),
+                new DivideAction("===== divide =====")
+        );
+        Input input = new ConsoleInput();
+        Output output = new ConsoleOutput();
+        calculator.start(actions, input, output);
     }
 }
-
-
