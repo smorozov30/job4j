@@ -4,8 +4,17 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
+/**
+ * Тест на класс SqArea.
+ *
+ * @author Sergey Morozov(morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class SqAreaTest {
 
+    /**
+     * Тест с периметром 4 и коэфициентом 1.
+     */
     @Test
     public void whenp4k1s1() {
         int k = 1;
@@ -15,6 +24,9 @@ public class SqAreaTest {
         assertThat(s, is(expected));
     }
 
+    /**
+     * Тест с периметром 6 и коэфициентом 2.
+     */
     @Test
     public void whenp6k2s2() {
         int k = 2;

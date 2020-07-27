@@ -3,8 +3,17 @@ package ru.job4j.converter;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Тест на класс Converter.
+ *
+ * @author Sergey Morozov(morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class ConverterTest {
 
+    /**
+     * Тестируем перевод рублей в евро.
+     */
     @Test
     public void rubleToEuro() {
         int in = 140;
@@ -13,6 +22,9 @@ public class ConverterTest {
         Assert.assertEquals(expected, out);
     }
 
+    /**
+     * Тестируем перевод рублей в доллары.
+     */
     @Test
     public void rubleToDollar() {
         int in = 180;
@@ -21,6 +33,9 @@ public class ConverterTest {
         Assert.assertEquals(expected, out);
     }
 
+    /**
+     * Тестируем перевод евро в рубли.
+     */
     @Test
     public void euroToRuble() {
         int in = 3;
@@ -29,6 +44,9 @@ public class ConverterTest {
         Assert.assertEquals(expected, out);
     }
 
+    /**
+     * Тестируем перевод доллары в рубли.
+     */
     @Test
     public void dollarToRuble() {
         int in = 10;

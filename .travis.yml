@@ -1,7 +1,7 @@
 # используем язык java. Travis CI поддерживает другие языки тоже.
 language: java
 jdk:
-  - openjdk11
+  - oraclejdk14
 
 services:
   - postgresql
@@ -21,7 +21,7 @@ after_success:
 notifications:
   email:
     recipients:
-      - sergey.se1ove.morozov@gmail.com
+      - morozov.java.job@gmail.com
     on_success: never # default: change
     on_failure: always # default: always
 env:

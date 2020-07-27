@@ -20,7 +20,7 @@ public class ShopTest {
         assertFalse(shop.checkProduct(milk));
         assertTrue(shop.checkProduct(meat));
         assertThat(meat.getDiscount(), is(0.0));
-        assertTrue(shop.checkProduct(bread));
+        assertFalse(shop.checkProduct(bread));
         assertThat(bread.getDiscount(), is(50.0));
         assertFalse(shop.checkProduct(apple));
 

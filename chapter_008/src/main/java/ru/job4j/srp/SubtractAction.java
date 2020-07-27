@@ -18,7 +18,7 @@ public class SubtractAction implements CalculateAction {
     @Override
     public double execute(Input input, Output output, double last) {
         int second = Integer.parseInt(input.input(output, "Введите второе число."));
-        double result = Calculator.substract(last, second);
+        double result = Calculator.subtract(last, second);
         output.output(Double.toString(result));
         return result;
     }

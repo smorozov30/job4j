@@ -24,7 +24,7 @@ public class ControlQualityTest {
         ControlQuality cq = new ControlQuality(storages);
         cq.distribution(foods);
         assertThat(warehouse.getAllProducts().size(), is(1));
-        assertThat(shop.getAllProducts().size(), is(2));
-        assertThat(trash.getAllProducts().size(), is(1));
+        assertThat(shop.getAllProducts().size(), is(1));
+        assertThat(trash.getAllProducts().size(), is(2));
     }
 }

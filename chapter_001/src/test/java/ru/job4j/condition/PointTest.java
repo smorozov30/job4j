@@ -3,8 +3,17 @@ package ru.job4j.condition;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Тест для класса Point.
+ *
+ * @author Sergey Morozov(morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class PointTest {
 
+    /**
+     * Тестируем получение расстояния между двумя точками.
+     */
     @Test
     public void distance() {
         int x1In = 5;

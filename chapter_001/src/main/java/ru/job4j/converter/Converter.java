@@ -1,57 +1,46 @@
 package ru.job4j.converter;
 
+/**
+ * Класс конвертер для перевода валюты.
+ *
+ * @author Sergey Morozov (morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class Converter {
 
+    /**
+     * Метод переводит рубли в евро.
+     * @param value - количество рублей.
+     * @return - количество евро.
+     */
     public static int rubleToEuro(int value) {
         return value / 70;
     }
 
+    /**
+     * Метод переводит рубли в доллары.
+     * @param value - количество рублей.
+     * @return - количество долларов.
+     */
     public static int rubleToDollar(int value) {
         return value / 60;
     }
 
+    /**
+     * Метод переводит евро в рубли.
+     * @param value - количество евро.
+     * @return - количество рублей.
+     */
     public static int euroToRuble(int value) {
         return value * 70;
     }
 
+    /**
+     * Метод переводит доллары в рубли.
+     * @param value - количество долларов.
+     * @return - количество рублей.
+     */
     public static int dollarToRuble(int value) {
         return value * 60;
-    }
-
-    public static void main(String[] args) {
-
-        int in = 140;
-        int expected = 2;
-        int out = rubleToEuro(in);
-        boolean passed = expected == out;
-        System.out.println("140 rubles are 2. Test result : " + passed);
-
-        in = 180;
-        expected = 3;
-        out = rubleToDollar(in);
-        passed = expected == out;
-        System.out.println("180 rubles are 3. Test result : " + passed);
-
-        in = 10;
-        expected = 700;
-        out = euroToRuble(in);
-        passed = expected == out;
-        System.out.println("10 euro are 700. Test result : " + passed);
-
-        in = 5;
-        expected = 300;
-        out = dollarToRuble(in);
-        passed = expected == out;
-        System.out.println("5 dollars are 300. Test result : " + passed);
-
-//        int euro = rubleToEuro(140);
-//        System.out.println("140 rubles are " + euro + " euro.");
-//        int dollar = rubleToDollar(600);
-//        System.out.println("600 rubles are " + dollar + " dollars.");
-//
-//        int ruble = euroToRuble(10);
-//        System.out.println("10 euro are " + ruble + " rubles.");
-//        ruble = dollarToRuble(15);
-//        System.out.println("15 dollars are " + ruble + " rubles.");
     }
 }
