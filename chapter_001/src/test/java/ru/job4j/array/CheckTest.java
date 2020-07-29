@@ -4,7 +4,17 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Тест на класс Check.
+ *
+ * @author Sergey Morozov(morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class CheckTest {
+
+    /**
+     * Проверям заполнение всего массива значениями true.
+     */
     @Test
     public void whenDataMonoByTrueThenTrue() {
         Check check = new Check();
@@ -13,6 +23,9 @@ public class CheckTest {
         assertThat(result, is(true));
     }
 
+    /**
+     * Проверяем неоднородность массива.
+     */
     @Test
     public void whenDataNotMonoByTrueThenFalse() {
         Check check = new Check();

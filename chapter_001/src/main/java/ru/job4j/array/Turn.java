@@ -1,12 +1,15 @@
 package ru.job4j.array;
 
 /**
- * Turn Класс переворачивает числовой массив
- * @author morozsergey30 (karandash.zapiskin@gmail.com)
+ * Класс переворачивает числовой массив.
+ *
+ * @author Sergey Morozov (morozov.java.job@gmail.com)
+ * @version 1.0
  */
 public class Turn {
+
     /**
-     * back Метод принимает числовой массив, переворачивает его и возвращает
+     * Метод принимает числовой массив, переворачивает его и возвращает.
      * @param array - исходный числовой массив
      * @return перевернутый массив
      */
@@ -16,7 +19,6 @@ public class Turn {
         for (int i = 0; i <= size; i++) {
             int start = i;
             int end = array.length - 1 - i;
-
             int temp = array[start];
             array[start] = array[end];
             array[end] = temp;

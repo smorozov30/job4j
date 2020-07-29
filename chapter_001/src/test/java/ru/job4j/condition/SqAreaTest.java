@@ -1,6 +1,7 @@
 package ru.job4j.condition;
 
 import org.junit.Test;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -11,6 +12,15 @@ import static org.junit.Assert.*;
  * @version 1.0
  */
 public class SqAreaTest {
+
+    /**
+     * Тестируем создание экземпляра класса SqArea.
+     */
+    @Test
+    public void createClass() {
+        SqArea sqArea = new SqArea();
+        assertNotNull(sqArea);
+    }
 
     /**
      * Тест с периметром 4 и коэфициентом 1.

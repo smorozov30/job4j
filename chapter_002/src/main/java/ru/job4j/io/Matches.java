@@ -2,7 +2,18 @@ package ru.job4j.io;
 
 import java.util.Scanner;
 
+/**
+ * Класс описывает простую игру "Списки".
+ *
+ * @author Sergey Morozov(morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class Matches {
+
+    /**
+     * Метод запуска игры.
+     * @param args - параметры командной строки.
+     */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int matches = 11;
@@ -26,7 +37,6 @@ public class Matches {
                 break;
             }
             System.out.println("На столе осталось " + matches + " спички(ек)");
-
         }
     }
 }

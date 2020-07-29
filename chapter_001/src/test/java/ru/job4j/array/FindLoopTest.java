@@ -4,8 +4,17 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Тест на класс FindLoop.
+ *
+ * @author Sergey Morozov(morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class FindLoopTest {
 
+    /**
+     * Тестируем поиск индекса числа 2 в дипазоне массива.
+     */
     @Test
     public void whenFind3() {
         int[] input = new int[] {5, 2, 10, 2, 4};
@@ -17,6 +26,9 @@ public class FindLoopTest {
         assertThat(result, is(expect));
     }
 
+    /**
+     * Тестируем поиск индекса числа 1 в дипазоне массива.
+     */
     @Test
     public void whenNotFind() {
         int[] input = new int[] {5, 2, 10, 6, 4};
@@ -28,6 +40,9 @@ public class FindLoopTest {
         assertThat(result, is(expect));
     }
 
+    /**
+     * Тестируем поиск индекса числа 5 массиве, когда элемент найден.
+     */
     @Test
     public void whenArrayHas5Then0() {
         FindLoop findLoop = new FindLoop();
@@ -38,6 +53,9 @@ public class FindLoopTest {
         assertThat(result, is(expected));
     }
 
+    /**
+     * Тестируем поиск индекса числа 5 массиве, когда элемент не найден.
+     */
     @Test
     public void whenArrayHasnt5ThenMinus1() {
         FindLoop findLoop = new FindLoop();

@@ -13,6 +13,15 @@ import org.junit.Test;
 public class FitTest {
 
     /**
+     * Тестируем создание экземпляра класса Calculator.
+     */
+    @Test
+    public void createClass() {
+        Fit fit = new Fit();
+        Assert.assertNotNull(fit);
+    }
+
+    /**
      * Тестируем получение веса для мужчины.
      */
     @Test

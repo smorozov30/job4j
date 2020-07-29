@@ -1,13 +1,21 @@
 package ru.job4j.sort;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-@Ignore
+/**
+ * Тест на класс Merge.
+ *
+ * @author Sergey Morozov(morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class MergeTest {
+
+    /**
+     * Тестируем слияние двух пустых массивов.
+     */
     @Test
     public void whenBothEmpty() {
         Merge algo = new Merge();
@@ -19,6 +27,9 @@ public class MergeTest {
         assertThat(result, is(expect));
     }
 
+    /**
+     * Тестируем слияние двух равных по длинне массивов.
+     */
     @Test
     public void whenAscOrder() {
         Merge algo = new Merge();
@@ -30,8 +41,11 @@ public class MergeTest {
         assertThat(result, is(expect));
     }
 
+    /**
+     * Тестируем слияние двух разных по длинне массивов.
+     */
     @Test
-    public void whenLeftLess() {
+    public void whenLeftGreat() {
         Merge algo = new Merge();
         int[] expect = {1, 2, 3, 3, 4};
         int[] result = algo.merge(
@@ -41,8 +55,11 @@ public class MergeTest {
         assertThat(result, is(expect));
     }
 
+    /**
+     * Тестируем слияние двух разных по длинне массивов.
+     */
     @Test
-    public void whenLeftGreat() {
+    public void whenLeftLess() {
         Merge algo = new Merge();
         int[] expect = {1, 2, 3, 4, 4};
         int[] result = algo.merge(
@@ -52,6 +69,9 @@ public class MergeTest {
         assertThat(result, is(expect));
     }
 
+    /**
+     * Тестируем слияние двух массивов, когда один пустой.
+     */
     @Test
     public void whenLeftEmpty() {
         Merge algo = new Merge();

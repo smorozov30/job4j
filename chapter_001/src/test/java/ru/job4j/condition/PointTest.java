@@ -12,6 +12,15 @@ import org.junit.Test;
 public class PointTest {
 
     /**
+     * Тестируем создание экземпляра класса Point.
+     */
+    @Test
+    public void whenCreateClassThenReturnNotNull() {
+        Point point = new Point();
+        Assert.assertNotNull(point);
+    }
+
+    /**
      * Тестируем получение расстояния между двумя точками.
      */
     @Test

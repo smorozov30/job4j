@@ -12,6 +12,15 @@ import org.junit.Test;
 public class ConverterTest {
 
     /**
+     * Тестируем создание экземпляра класса.
+     */
+    @Test
+    public void whenCreateObject() {
+        Converter converter = new Converter();
+        Assert.assertNotNull(converter);
+    }
+
+    /**
      * Тестируем перевод рублей в евро.
      */
     @Test

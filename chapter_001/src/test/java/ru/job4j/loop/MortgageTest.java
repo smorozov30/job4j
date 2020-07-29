@@ -5,7 +5,17 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
+/**
+ * Тест на класс Mortgage.
+ *
+ * @author Sergey Morozov(morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class MortgageTest {
+
+    /**
+     * Тестируем когда платить нужно один год.
+     */
     @Test
     public void when1Year() {
         Mortgage mortgage = new Mortgage();
@@ -13,6 +23,9 @@ public class MortgageTest {
         assertThat(year, is(1));
     }
 
+    /**
+     * Тестируем когда платить нужно два года.
+     */
     @Test
     public void when2Year() {
         Mortgage mortgage = new Mortgage();

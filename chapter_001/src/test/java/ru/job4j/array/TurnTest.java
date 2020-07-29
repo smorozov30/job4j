@@ -4,7 +4,17 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Тест на класс Turn.
+ *
+ * @author Sergey Morozov(morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class TurnTest {
+
+    /**
+     * Тестируем случай когда нужно перевернуть массив с четным числом элементов.
+     */
     @Test
     public void whenTurnArrayWithEvenAmountOfElementsThenTurnedArray() {
         Turn turner = new Turn();
@@ -14,6 +24,9 @@ public class TurnTest {
         assertThat(result, is(expected));
     }
 
+    /**
+     * Тестируем случай когда нужно перевернуть массив с нечетным числом элементов.
+     */
     @Test
     public void whenTurnArrayWithOddAmountOfElementsThenTurnedArray() {
         Turn turner = new Turn();

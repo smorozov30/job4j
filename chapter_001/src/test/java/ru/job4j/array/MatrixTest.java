@@ -4,7 +4,17 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Тест на класс Matrix.
+ *
+ * @author Sergey Morozov (morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class MatrixTest {
+
+    /**
+     * Теституем создание матрицы 2*2.
+     */
     @Test
     public void when2on2() {
         Matrix matrix = new Matrix();
@@ -14,6 +24,9 @@ public class MatrixTest {
         assertThat(table, is(expected));
     }
 
+    /**
+     * Теституем создание матрицы 5*5.
+     */
     @Test
     public void when5on5() {
         Matrix matrix = new Matrix();

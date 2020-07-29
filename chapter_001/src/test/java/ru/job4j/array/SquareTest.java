@@ -4,7 +4,17 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Тест на класс Square.
+ *
+ * @author Sergey Morozov(morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class SquareTest {
+
+    /**
+     * Тестируем заполнение масиива размером 3.
+     */
     @Test
     public void whenBound3Then149() {
         int bound = 3;
@@ -13,6 +23,10 @@ public class SquareTest {
         int[] expected = new int[]{1, 4, 9};
         assertThat(rst, is(expected));
     }
+
+    /**
+     * Тестируем заполнение масиива размером 3.
+     */
     @Test
     public void whenBound5Then1491625() {
         int bound = 5;
@@ -22,6 +36,9 @@ public class SquareTest {
         assertThat(rst, is(expected));
     }
 
+    /**
+     * Тестируем заполнение масиива размером 3.
+     */
     @Test
     public void whenBound7Then14916253649() {
         int bound = 7;

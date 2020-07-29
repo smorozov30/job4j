@@ -23,8 +23,8 @@ public class ControlQualityTest {
         List<Storage> storages = Arrays.asList(warehouse, shop, trash);
         ControlQuality cq = new ControlQuality(storages);
         cq.distribution(foods);
-        assertThat(warehouse.getAllProducts().size(), is(1));
-        assertThat(shop.getAllProducts().size(), is(1));
+        assertThat(warehouse.getAllProducts().size(), is(0));
+        assertThat(shop.getAllProducts().size(), is(2));
         assertThat(trash.getAllProducts().size(), is(2));
     }
 }

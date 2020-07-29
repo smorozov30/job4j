@@ -1,14 +1,15 @@
 package ru.job4j.array;
 
 /**
- * Check Класс определяет заполнен масиив только true/false
- * @author morozsergey30 (karandash.zapiskin@gmail.com)
+ * Класс определяет заполнен масиив только true/false.
+ * @author Sergey Morozov (morozov.java.job@gmail.com)
  */
 public class Check {
+
     /**
-     * mono Метод принимает массив логических переменных и определяет все элементы одного типа или нет
-     * @param data - массив для проверки
-     * @return - логическая переменная, означающая однородный или не однородный массив
+     * Метод принимает массив логических переменных и определяет все элементы одного типа.
+     * @param data - массив для проверки.
+     * @return - результат проверки.
      */
     public boolean mono(boolean[] data) {
         boolean result = true;

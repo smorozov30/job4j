@@ -1,5 +1,11 @@
 package ru.job4j.pojo;
 
+/**
+ * Класс описывающий магазин продуктов.
+ *
+ * @author Sergey Morozov(morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class Store {
     public static void main(String[] args) {
         Product milk = new Product("Milk", 10);

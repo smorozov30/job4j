@@ -1,5 +1,11 @@
 package ru.job4j.pojo;
 
+/**
+ * Класс описывающий книгу.
+ *
+ * @author Sergey Morozov(morozov.java.job@gmail.com)
+ * @version 1.0
+ */
 public class Book {
     private String name;
     private int count;

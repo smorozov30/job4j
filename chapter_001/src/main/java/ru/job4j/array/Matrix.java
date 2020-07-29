@@ -1,14 +1,17 @@
 package ru.job4j.array;
 
 /**
- * Matrix Класс создает талицу умножения заданного размера
- * @author morozsergey30 (karandash.zapiskin@gmail.com)
+ * Класс создает таблицу умножения заданного размера.
+ *
+ * @author Sergey Morozov (morozov.java.job@gmail.com)
+ * @version 1.0
  */
 public class Matrix {
+
     /**
-     * multiple Метод принимает размер таблицы умноженияб создает таблицу и возвращает ее
-     * @param size - требуемый размер таблицы умножения
-     * @return - созданная таблица
+     * Метод принимает размер таблицы умножения и создает таблицу.
+     * @param size - требуемый размер таблицы умножения.
+     * @return - созданная таблица.
      */
     public int[][] multiple(int size) {
         int[][] table = new int[size][size];

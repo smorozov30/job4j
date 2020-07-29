@@ -12,6 +12,15 @@ import org.junit.Test;
 public class TrgAreaTest {
 
     /**
+     * Тестируем создание экземпляра класса TrgArea.
+     */
+    @Test
+    public void whenCreateObject() {
+        TrgArea trgArea = new TrgArea();
+        Assert.assertNotNull(trgArea);
+    }
+
+    /**
      * Тестируем получение площади по длина трех сторон.
      */
     @Test
