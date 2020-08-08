@@ -16,11 +16,10 @@ public class CarParkingTest {
      */
     @Test
     public void whenCanParkTwoPassengerCars() {
-        Parking parking = new CarParking(2, 0);
+        Parking parking = new ParkingControl(2, 0);
         Car passengerCar1 = new PassengerCar("o111oo30");
         Car passengerCar2 = new PassengerCar("o222oo30");
         Car passengerCar3 = new PassengerCar("o333oo30");
-        assertTrue(parking.canPark(passengerCar1));
         assertTrue(parking.park(passengerCar1));
         assertTrue(parking.canPark(passengerCar2));
         assertTrue(parking.park(passengerCar2));
@@ -33,7 +32,7 @@ public class CarParkingTest {
      */
     @Test
     public void whenCanParkOneTruckOnPlaceForCars() {
-        Parking parking = new CarParking(2, 0);
+        Parking parking = new ParkingControl(2, 0);
         Car truck = new Truck("o111oo30");
         assertTrue(parking.canPark(truck));
         assertTrue(parking.park(truck));
@@ -44,7 +43,7 @@ public class CarParkingTest {
      */
     @Test
     public void whenCanParkOneTruckOnPlaceForTrack() {
-        Parking parking = new CarParking(0, 1);
+        Parking parking = new ParkingControl(0, 1);
         Car truck = new Truck("o111oo30");
         assertTrue(parking.canPark(truck));
         assertTrue(parking.park(truck));
@@ -55,7 +54,7 @@ public class CarParkingTest {
      */
     @Test
     public void whenCanNotParkOneCarOnPlaceForTrack() {
-        Parking parking = new CarParking(0, 1);
+        Parking parking = new ParkingControl(0, 1);
         Car passengerCar1 = new PassengerCar("o111oo30");
         assertFalse(parking.canPark(passengerCar1));
         assertFalse(parking.park(passengerCar1));
@@ -66,13 +65,23 @@ public class CarParkingTest {
      */
     @Test
     public void whenCanParkOnePassengerCarsAndOneTruck() {
-        Parking parking = new CarParking(1, 1);
+        ParkingControl pc = new ParkingControl(1, 1);
         Car passengerCar1 = new PassengerCar("o111oo30");
         Car truck1 = new Truck("x222xx30");
-        assertTrue(parking.canPark(passengerCar1));
-        assertTrue(parking.park(passengerCar1));
-        assertTrue(parking.canPark(truck1));
-        assertTrue(parking.park(truck1));
+        assertTrue(pc.park(passengerCar1));
+        assertTrue(pc.park(truck1));
+    }
+
+    /**
+     * Тестируем возможность совместной парковки легковых и грузовых на место легковых.
+     */
+    @Test
+    public void whenCanParkOnePassengerCarsAndOneTruckOnCarPlaces() {
+        ParkingControl pc = new ParkingControl(3, 0);
+        Car passengerCar1 = new PassengerCar("o111oo30");
+        Car truck1 = new Truck("x222xx30");
+        assertTrue(pc.park(passengerCar1));
+        assertTrue(pc.park(truck1));
     }
 
     /**
@@ -80,13 +89,13 @@ public class CarParkingTest {
      */
     @Test
     public void whenCarLeaveParkThanReturnCanParkTrue() {
-        Parking parking = new CarParking(2, 0);
+        Parking parking = new ParkingControl(1, 0);
         Car passengerCar1 = new PassengerCar("o111oo30");
         assertTrue(parking.park(passengerCar1));
-        Car truck1 = new Truck("x222xx30");
-        assertFalse(parking.canPark(truck1));
+        Car passengerCar2 = new PassengerCar("o222oo30");
+        assertFalse(parking.canPark(passengerCar2));
         assertTrue(parking.leave(passengerCar1.number()));
-        assertTrue(parking.canPark(truck1));
-        assertTrue(parking.park(truck1));
+        assertTrue(parking.canPark(passengerCar2));
+        assertTrue(parking.park(passengerCar2));
     }
 }
