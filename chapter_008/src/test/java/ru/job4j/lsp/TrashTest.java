@@ -17,7 +17,7 @@ public class TrashTest {
         Bread bread = new Bread("bread", new GregorianCalendar(2020, Calendar.JULY, 26), new GregorianCalendar(2020, Calendar.JULY, 13), 120.0);
         Apple apple = new Apple("apple", new GregorianCalendar(2020, Calendar.JULY, 22), new GregorianCalendar(2020, Calendar.JULY, 20), 130.0);
         assertTrue(trash.checkProduct(meat));
-        assertFalse(trash.checkProduct(milk));
+        assertTrue(trash.checkProduct(milk));
         assertTrue(trash.checkProduct(bread));
         assertTrue(trash.checkProduct(apple));
     }
