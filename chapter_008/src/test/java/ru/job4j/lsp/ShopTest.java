@@ -17,7 +17,11 @@ public class ShopTest {
         Meat meat = new Meat("meat", new GregorianCalendar(2020, Calendar.AUGUST, 3), new GregorianCalendar(2020, Calendar.JULY, 13), 110.0);
         Bread bread = new Bread("bread", new GregorianCalendar(2020, Calendar.JULY, 26), new GregorianCalendar(2020, Calendar.JULY, 13), 120.0);
         Apple apple = new Apple("apple", new GregorianCalendar(2020, Calendar.JULY, 22), new GregorianCalendar(2020, Calendar.JULY, 20), 130.0);
+<<<<<<< HEAD
         assertFalse(shop.checkProduct(milk));
+=======
+        assertTrue(shop.checkProduct(milk));
+>>>>>>> design_lsp
         assertFalse(shop.checkProduct(meat));
         assertThat(meat.getDiscount(), is(50.0));
         assertFalse(shop.checkProduct(bread));
