@@ -3,13 +3,20 @@ package ru.job4j.net;
 import java.io.*;
 import java.net.URL;
 
-public class FileDownload {
-    public static void main(String[] args) throws Exception {
-        String file = args[0];
-        int limitSpeed = Integer.parseInt(args[1]);
-        double limitTime = 1000;
-        double limitTime1kb = limitTime / limitSpeed;
-        try (BufferedInputStream in = new BufferedInputStream(new URL(file).openStream());
+public class Wget implements Runnable {
+    private final String url;
+    private final int speed;
+
+    public Wget(String url, int speed) {
+        this.url = url;
+        this.speed = speed;
+    }
+
+    @Override
+    public void run() {
+        double periodOfTime = 1000.0;
+        double limitTime1kb = periodOfTime / this.speed;
+        try (BufferedInputStream in = new BufferedInputStream(new URL(this.url).openStream());
              FileOutputStream fileOutputStream = new FileOutputStream("pom_tmp.xml")) {
             byte[] dataBuffer = new byte[1024];
             int bytesRead;
@@ -25,8 +32,16 @@ public class FileDownload {
                     fileOutputStream.write(dataBuffer, 0, bytesRead);
                 }
             } while (bytesRead != -1);
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        String url = args[0];
+        int speed = Integer.parseInt(args[1]);
+        Thread wget = new Thread(new Wget(url, speed));
+        wget.start();
+        wget.join();
     }
 }
