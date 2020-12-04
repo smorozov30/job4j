@@ -1,9 +1,11 @@
 package ru.job4j.email;
 
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class EmailNotification {
-    private ExecutorService pool;
+    private ExecutorService pool = Executors.newFixedThreadPool(
+            Runtime.getRuntime().availableProcessors());
 
     public void emailTo(User user) {
         this.pool.submit(() -> {
