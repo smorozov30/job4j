@@ -5,4 +5,4 @@
  * @version 1
  * @since 24.10.2019
  */
-package ru.job4j.calculate;
+package ru.job4j.calculator;

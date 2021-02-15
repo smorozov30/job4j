@@ -26,6 +26,12 @@ public class MatrixCheck {
         return result;
     }
 
+    /**
+     * Проверяет выигрышную комбинацию по горизонталям.
+     * @param board - доска с фигурами.
+     * @param index - индекс проверяемой линии.
+     * @return - результат проверки.
+     */
     public boolean monoHorizontal(char[][] board, int index) {
         int countHorizontal = 0;
         for (int i = 0; i < board.length; i++) {
@@ -36,6 +42,12 @@ public class MatrixCheck {
         return countHorizontal == board.length;
     }
 
+    /**
+     * Проверяет выигрышную комбинацию по вертикали.
+     * @param board - доска с фигурами.
+     * @param index - индекс проверяемой колонны.
+     * @return - результат проверки.
+     */
     public boolean monoVertical(char[][] board, int index) {
         int countVertical = 0;
         for (int i = 0; i < board.length; i++) {
