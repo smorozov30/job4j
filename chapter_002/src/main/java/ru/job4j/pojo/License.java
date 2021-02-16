@@ -2,6 +2,12 @@ package ru.job4j.pojo;
 
 import java.util.Date;
 
+/**
+ * Класс лицензия.
+ *
+ * @author Sergey Morozov(moroz.future@gmail.com)
+ * @version 1.0
+ */
 public class License {
     private String owner;
     private String model;

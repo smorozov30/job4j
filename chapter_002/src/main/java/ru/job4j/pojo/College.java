@@ -2,6 +2,12 @@ package ru.job4j.pojo;
 
 import java.util.Date;
 
+/**
+ * Класс колледж.
+ *
+ * @author Sergey Morozov(moroz.future@gmail.com)
+ * @version 1.0
+ */
 public class College {
     public static void main(String[] args) {
         Student student = new Student();

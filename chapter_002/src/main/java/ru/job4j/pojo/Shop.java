@@ -1,5 +1,11 @@
 package ru.job4j.pojo;
 
+/**
+ * Класс магазин.
+ *
+ * @author Sergey Morozov(moroz.future@gmail.com)
+ * @version 1.0
+ */
 public class Shop {
     public static void main(String[] args) {
         Product[] products = new Product[3];
@@ -30,6 +36,12 @@ public class Shop {
         }
     }
 
+    /**
+     * Метод удаления из массива продукта, и дефрагментация массива.
+     * @param products - массив продуктов.
+     * @param index - индекс удаляемого продукта.
+     * @return - обработанный масиив.
+     */
     public Product[] delete(Product[] products, int index) {
         for ( ; index < products.length - 1; index++) {
             products[index] = products[index + 1];

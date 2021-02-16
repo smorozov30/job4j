@@ -1,5 +1,11 @@
 package ru.job4j.sorting;
 
+/**
+ * Класс пользователь.
+ *
+ * @author Sergey Morozov(moroz.future@gmail.com)
+ * @version 1.0
+ */
 public class User implements Comparable {
     private String name;
     private int age;

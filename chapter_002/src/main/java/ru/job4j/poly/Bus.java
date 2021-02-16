@@ -1,5 +1,11 @@
 package ru.job4j.poly;
 
+/**
+ * Класс автобус.
+ *
+ * @author Sergey Morozov(moroz.future@gmail.com)
+ * @version 1.0
+ */
 public class Bus implements Transport {
     @Override
     public void drive() {

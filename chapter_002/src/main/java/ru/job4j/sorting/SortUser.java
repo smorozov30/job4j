@@ -3,6 +3,12 @@ package ru.job4j.sorting;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Класс демонстрация компараторов.
+ *
+ * @author Sergey Morozov(moroz.future@gmail.com)
+ * @version 1.0
+ */
 public class SortUser {
 
     public Set<User> sort(List<User> list) {

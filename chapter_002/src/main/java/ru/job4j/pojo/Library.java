@@ -1,5 +1,11 @@
 package ru.job4j.pojo;
 
+/**
+ * Класс библиотека.
+ *
+ * @author Sergey Morozov(moroz.future@gmail.com)
+ * @version 1.0
+ */
 public class Library {
     public static void main(String[] args) {
         Book clean = new Book("Clean code", 500);

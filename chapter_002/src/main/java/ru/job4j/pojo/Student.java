@@ -2,6 +2,12 @@ package ru.job4j.pojo;
 
 import java.util.Date;
 
+/**
+ * Класс студент.
+ *
+ * @author Sergey Morozov(moroz.future@gmail.com)
+ * @version 1.0
+ */
 public class Student {
     private String name;
     private String surname;
